@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>IEEE TXST Computer Society — Collaborative Roster</title>
+    <style>
+      :root {
+        --maroon: #501214;
+        --gold: #cfa15a;
+        --background: #ffffff;
+        --text-color: #1f1f1f;
+        --accent-bg: #f8f3ea;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--background);
+        color: var(--text-color);
+        line-height: 1.6;
+      }
+
+      header {
+        background: var(--maroon);
+        color: #ffffff;
+        padding: 2rem 1.5rem;
+        text-align: center;
+      }
+
+      header h1 {
+        margin: 0 0 0.5rem;
+        font-size: clamp(1.8rem, 4vw, 2.5rem);
+      }
+
+      header p {
+        margin: 0;
+        font-size: 1.05rem;
+      }
+
+      main {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 2rem 1.5rem 4rem;
+      }
+
+      main h2 {
+        color: var(--maroon);
+        border-bottom: 3px solid var(--gold);
+        display: inline-block;
+        padding-bottom: 0.25rem;
+        margin-top: 0;
+      }
+
+      #roster {
+        list-style: none;
+        padding: 0;
+        margin: 2rem 0 0;
+        display: grid;
+        gap: 1rem;
+      }
+
+      .roster-entry {
+        background: var(--accent-bg);
+        border-left: 4px solid var(--gold);
+        padding: 1rem;
+        border-radius: 6px;
+      }
+
+      .roster-entry strong {
+        color: var(--maroon);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>IEEE TXST Computer Society — Collaborative Roster</h1>
+      <p>This is the one live org site. Add your JSON via PR.</p>
+    </header>
+    <main>
+      <h2>Current Contributors</h2>
+      <p>
+        Students appear here after submitting a pull request with their JSON file.
+        Officers review changes before they go live.
+      </p>
+      <ul id="roster" aria-live="polite"></ul>
+      <noscript>
+        <p>
+          Enable JavaScript to view the roster. The site reads JSON files to
+          display student information.
+        </p>
+      </noscript>
+    </main>
+    <script src="./js/script.js" defer></script>
+  </body>
+</html>

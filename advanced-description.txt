@@ -1,0 +1,79 @@
+Advanced Technical Description of ieee-txst-collaboration-site Repository
+=======================================================================
+
+Overview
+--------
+This repository hosts a static, client-rendered roster web application for the IEEE TXST Computer Society. The application is delivered as a simple GitHub Pages-compatible site without build tooling. It relies on declarative HTML, embedded CSS, vanilla JavaScript, and JSON data. An auxiliary Python script allows organizers to regenerate the JSON manifest that enumerates student data files.
+
+Directory Topology
+------------------
+- `index.html`: Entry point HTML document containing structural markup, inline styling, and the script loader for the roster logic.
+- `js/script.js`: Browser-side JavaScript responsible for fetching, validating, and rendering roster entries.
+- `data/students/`: Persistent JSON datastore directory for individual student records and the manifest (`index.json`).
+  - `example.json`: Canonical template record that contributors duplicate and customize.
+  - `index.json`: Manifest array enumerating the JSON filenames that should be fetched on the front end.
+- `scripts/update_manifest.py`: Python utility that builds a fresh manifest by scanning `data/students/` and serializing the list of discovered JSON files.
+- `README.md`: Operational playbook for students and organizers.
+- `LICENSE`: Repository licensing metadata (MIT).
+
+index.html
+----------
+- Declares the document language as English and sets responsive viewport metadata.
+- Applies inline CSS to avoid external stylesheet dependencies, defining TXST-aligned color variables (`--maroon`, `--gold`, etc.) and typography rules.
+- Structure:
+  - `<header>` with the primary title “IEEE TXST Computer Society — Collaborative Roster” and a call-to-action paragraph.
+  - `<main>` containing a secondary heading, explanatory paragraph, roster container `<ul id="roster">`, and a `<noscript>` fallback message.
+- Defers loading of `/js/script.js` to maintain HTML parsing performance.
+- Accessibility considerations include `aria-live="polite"` on the roster `<ul>` so assistive technologies announce dynamic updates.
+
+JavaScript Runtime (js/script.js)
+---------------------------------
+- Extracts a reference to the roster `<ul>` via `document.getElementById('roster')`.
+- Utility functions:
+  - `createMessageItem(message)`: Builds list items for status messages (empty state, error feedback) with CSS class `roster-entry`.
+  - `fetchJson(url)`: Wraps `fetch` with HTTP status validation, raising errors for non-2xx responses to unify error handling.
+  - `isValidStudent(entry)`: Enforces schema requirements (`name`, `major`, `grad_year`). Accepts numeric or string `grad_year` and performs `.trim()` to reject blank values.
+  - `renderRoster(entries)`: Clears existing child nodes, renders either an empty-state message or iterates over validated students. Each student entry creates an `<li>` with bolded name and inline details formatted as “ — Major — Class of YYYY”.
+- `loadRoster()` orchestrates asynchronous fetching:
+  1. Loads `data/students/index.json` expecting an array of filenames; throws if the manifest is not an array.
+  2. Iterates manifest entries, skipping non-string or blank values.
+  3. Fetches each student JSON (`data/students/<filename>`). Exceptions from individual fetches are caught to keep the loop resilient.
+  4. Validated student objects are stored in a local array and sorted alphabetically by `name` via `localeCompare`.
+  5. Delegates to `renderRoster` to update the DOM.
+  6. A top-level `try/ catch` surfaces fatal errors and renders a user-facing fallback message.
+- Registers `loadRoster` on `DOMContentLoaded` to ensure DOM availability before mutations.
+
+Data Contract
+-------------
+Each student JSON file must conform to the structure:
+```
+{
+  "name": "Full Name",
+  "major": "Declared Major",
+  "grad_year": 2028
+}
+```
+Additional properties are ignored by the loader, but the validation guard filters out malformed documents to prevent runtime failures.
+
+Manifest Semantics (`data/students/index.json`)
+---------------------------------------------
+- The manifest is a JSON array of strings (filenames with `.json` extension) in lexical order.
+- `script.js` consumes this manifest to determine which student files to fetch. Because static hosting cannot enumerate directories, the manifest is mandatory for dynamic loading.
+- The manifest excludes itself to avoid self-referential reads.
+
+Python Manifest Generator (`scripts/update_manifest.py`)
+-------------------------------------------------------
+- Uses `pathlib.Path` to navigate relative to the script location, ensuring portability.
+- Scans the `data/students/` directory with `glob('*.json')`, filters out `index.json`, sorts filenames lexicographically, and serializes the list with `json.dumps(..., indent=2)`.
+- Writes the serialized array to `index.json` using UTF-8 encoding and appends a trailing newline for POSIX compatibility.
+- Prints a summary message (count of student files) to STDOUT. The script exits with non-zero status if the students directory is missing.
+
+Operational Workflow
+--------------------
+- Students contribute new JSON records without modifying the manifest. Officers merge the pull requests.
+- After a batch of merges, organizers execute `python3 scripts/update_manifest.py` locally, review the diff for `data/students/index.json`, commit, and push. This triggers a GitHub Pages rebuild propagating roster updates.
+
+Extensibility Considerations
+----------------------------
+- The static architecture allows optional future enhancements such as automated manifest generation via CI, client-side filtering or search, and additional validation (e.g., schema enforcement through JSON Schema tooling).
+- The JavaScript loader is framework-agnostic and can be extended to include metrics (e.g., contributor counts) or UI embellishments without altering the data contract.
