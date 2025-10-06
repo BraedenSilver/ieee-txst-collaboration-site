@@ -20,21 +20,32 @@ That is everything. No programming experience is required, and the steps are gui
 
 If this is your first time seeing Git or GitHub, start with this glossary. Refer back to it whenever a new word shows up.
 
+### Must-learn definitions
+
+These are the terms you will use every time you contribute to the group project.
+
 - **Git:** The version control system (a tool that tracks file changes) that runs behind the scenes.
 - **GitHub:** A website that stores Git repositories online and makes it easy for people to collaborate.
-- **Repository (repo):** A project folder tracked by Git. It includes every file, plus a history of all changes.
+- **Repository (repo):** A project folder tracked by Git. It includes every file, plus a history of all changes. Repositories can be public to the world, shared with an organization, or private just for you.
+- **Fork:** Your personal copy of the organization’s repository on GitHub. Forking lets you make changes safely because the original project stays untouched until your pull request is merged.
+- **Clone:** A download of a remote repository to your own computer so you can work on it locally. GitHub Desktop performs this step when you sign in and choose your fork.
+- **Directory (local repo):** The copy of the project stored on your computer. To keep it in sync with GitHub, start by pulling the latest changes from your fork, edit your files, commit those edits, and finally push the new commit back to GitHub.
 - **Remote:** A repository stored online (for example, on GitHub). Your computer copies changes to and from the remote.
-- **Origin / upstream:** The default nicknames Git uses for remotes. `origin` usually points to your fork; `upstream` often points to the original project.
-- **Fetch:** Ask the remote whether anything changed and download those updates without merging them yet.
-- **Fork:** Your personal remote copy of someone else’s repository. Forking lets you experiment without touching the original.
-- **Clone:** A download of a remote repository to your own computer so you can work on it locally. GitHub Desktop performs this step for you.
 - **Branch:** A named line of work inside a repository. Branches let you try changes separately from the main project.
 - **Main branch (`main`):** The branch that represents the live project. Other branches are merged into it after review.
-- **Commit:** A saved snapshot of your changes with a message that explains what you did. Think of it as a checkpoint.
-- **Push:** Uploading your commits from your computer to the remote repository on GitHub.
-- **Pull:** Downloading commits from the remote repository to your computer so you stay up to date.
+- **Commit:** A saved snapshot of your changes with a message that explains what you did. Think of it as a checkpoint you can return to if needed.
+- **Push:** Uploading your commits from your computer to the remote repository on GitHub so everyone else can see them.
+- **Pull:** Downloading commits from the remote repository to your computer so you stay up to date before you start working.
 - **Merge:** Combining the commits from one branch into another. Merging adds your changes to the main branch after approval.
 - **Pull request (PR):** A request on GitHub asking maintainers to review your branch and merge it into the main branch.
+- **GitHub Pages:** GitHub’s static site hosting service. When this project’s main branch updates, GitHub Pages rebuilds and publishes the live roster website automatically.
+
+### Additional definitions
+
+These words are helpful but not required for the roster workflow.
+
+- **Origin / upstream:** The default nicknames Git uses for remotes. `origin` usually points to your fork; `upstream` often points to the original project.
+- **Fetch:** Ask the remote whether anything changed and download those updates without merging them yet.
 - **Issue:** A conversation thread on GitHub used to report problems, ask questions, or propose features.
 - **Markdown (`.md`) file:** A plain-text file that uses simple symbols (like `#` for headings) to format text. The README you are reading is written in Markdown.
 - **License:** A document that explains how others are allowed to use the project’s code and content. Software repositories typically include one so contributors know the rules.
