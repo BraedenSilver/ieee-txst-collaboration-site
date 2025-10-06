@@ -1,5 +1,6 @@
 {
   "name": "Example Student",
   "major": "Computer Science",
-  "grad_year": 2028
+  "grad_year": 2028,
+  "repo": "github.com"
 }
