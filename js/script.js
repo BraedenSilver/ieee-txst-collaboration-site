@@ -15,16 +15,32 @@ async function fetchJson(url) {
   return response.json();
 }
 
+function normalizeRepoUrl(repo) {
+  const trimmedRepo = repo.trim();
+  if (!trimmedRepo) {
+    return '';
+  }
+
+  return /^https?:\/\//i.test(trimmedRepo)
+    ? trimmedRepo
+    : `https://${trimmedRepo}`;
+}
+
 function isValidStudent(entry) {
   if (!entry || typeof entry !== 'object') return false;
-  const { name, major, grad_year: gradYear } = entry;
+  const { name, major, grad_year: gradYear, repo } = entry;
+  const hasValidRepo =
+    repo === undefined ||
+    (typeof repo === 'string' && repo.trim().length > 0);
+
   return (
     typeof name === 'string' &&
     name.trim().length > 0 &&
     typeof major === 'string' &&
     major.trim().length > 0 &&
     (typeof gradYear === 'number' || typeof gradYear === 'string') &&
-    `${gradYear}`.trim().length > 0
+    `${gradYear}`.trim().length > 0 &&
+    hasValidRepo
   );
 }
 
@@ -38,7 +54,7 @@ function renderRoster(entries) {
     return;
   }
 
-  entries.forEach(({ name, major, grad_year: gradYear }) => {
+  entries.forEach(({ name, major, grad_year: gradYear, repo }) => {
     const item = document.createElement('li');
     item.className = 'roster-entry';
 
@@ -50,6 +66,20 @@ function renderRoster(entries) {
 
     item.appendChild(nameStrong);
     item.appendChild(details);
+
+    if (typeof repo === 'string' && repo.trim().length > 0) {
+      const repoLink = document.createElement('a');
+      const repoText = repo.trim();
+      repoLink.href = normalizeRepoUrl(repoText);
+      repoLink.textContent = repoText;
+      repoLink.target = '_blank';
+      repoLink.rel = 'noopener noreferrer';
+
+      const separator = document.createTextNode(' — ');
+      item.appendChild(separator);
+      item.appendChild(repoLink);
+    }
+
     rosterElement.appendChild(item);
   });
 }
