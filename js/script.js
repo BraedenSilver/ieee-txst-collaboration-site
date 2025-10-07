@@ -128,4 +128,104 @@ async function loadRoster() {
   }
 }
 
-document.addEventListener('DOMContentLoaded', loadRoster);
+function initKonamiEasterEgg() {
+  const sequence = [
+    'ArrowUp',
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'ArrowLeft',
+    'ArrowRight',
+    'b',
+    'a'
+  ];
+
+  let progressIndex = 0;
+  let overlay = null;
+
+  const closeOverlay = () => {
+    if (!overlay) {
+      return;
+    }
+
+    const frame = overlay.querySelector('iframe');
+    if (frame) {
+      frame.src = '';
+    }
+
+    overlay.remove();
+    overlay = null;
+  };
+
+  const showOverlay = () => {
+    if (overlay) {
+      return;
+    }
+
+    overlay = document.createElement('div');
+    overlay.className = 'konami-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Never gonna give you up');
+
+    const dialog = document.createElement('div');
+    dialog.className = 'konami-dialog';
+
+    const title = document.createElement('h3');
+    title.textContent = 'You found the Easter Egg!';
+
+    const frameWrapper = document.createElement('div');
+    frameWrapper.className = 'konami-frame';
+
+    const frame = document.createElement('iframe');
+    frame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+    frame.title = 'Never Gonna Give You Up by Rick Astley';
+    frame.allow =
+      'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    frame.allowFullscreen = true;
+
+    const closeButton = document.createElement('button');
+    closeButton.className = 'konami-close';
+    closeButton.type = 'button';
+    closeButton.textContent = 'Close';
+    closeButton.addEventListener('click', closeOverlay);
+
+    overlay.addEventListener('click', (event) => {
+      if (event.target === overlay) {
+        closeOverlay();
+      }
+    });
+
+    frameWrapper.appendChild(frame);
+    dialog.appendChild(title);
+    dialog.appendChild(frameWrapper);
+    dialog.appendChild(closeButton);
+    overlay.appendChild(dialog);
+    document.body.appendChild(overlay);
+    closeButton.focus();
+  };
+
+  document.addEventListener('keydown', (event) => {
+    if (overlay && event.key === 'Escape') {
+      closeOverlay();
+      return;
+    }
+
+    if (event.key === sequence[progressIndex]) {
+      progressIndex += 1;
+      if (progressIndex === sequence.length) {
+        showOverlay();
+        progressIndex = 0;
+      }
+    } else {
+      progressIndex = event.key === sequence[0] ? 1 : 0;
+    }
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadRoster();
+  initKonamiEasterEgg();
+});
