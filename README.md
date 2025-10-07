@@ -131,7 +131,15 @@ The script scans every JSON file in `data/students/` (except `index.json`), sort
 
 ---
 
-## 7. Need help?
+---
+
+## 7. Powered by GitHub Pages
+
+The roster is hosted through GitHub Pages, so every accepted pull request automatically updates the live site. The footer now includes a short “Powered by GitHub Pages” callout that links to the service in case curious visitors want to learn more.
+
+---
+
+## 8. Need help?
 
 If you get stuck at any point, reach out to an IEEE TXST Computer Society officer. They can walk you through the steps live or share screenshots of what to click.
 
