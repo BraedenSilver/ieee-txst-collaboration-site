@@ -6,6 +6,19 @@ The README below explains everything in plain language, so even if you have neve
 
 ---
 
+## Contents
+
+- [1. What you need before you start](#1-what-you-need-before-you-start)
+- [2. Vocabulary: Git & GitHub words in plain English](#2-vocabulary-git--github-words-in-plain-english)
+- [3. Live site location](#3-live-site-location)
+- [4. Student checklist (step-by-step)](#4-student-checklist-step-by-step)
+- [5. Participation rules (for students)](#5-participation-rules-for-students)
+- [6. Organizer workflow (officers only)](#6-organizer-workflow-officers-only)
+- [7. Powered by GitHub Pages](#7-powered-by-github-pages)
+- [8. Need help?](#8-need-help)
+
+---
+
 ## 1. What you need before you start
 
 1. **A GitHub account.** If you do not have one, visit [github.com](https://github.com) and sign up. The free plan is all you need. Officers will share the club repository link after the organization account is ready, so for now simply create your personal account.
@@ -62,39 +75,40 @@ After the workshop entries are merged, the live roster will publish through the 
 
 ## 4. Student checklist (step-by-step)
 
-Follow the steps in order. GitHub Desktop makes them point-and-click.
+Follow these instructions one at a time. Every bullet tells you exactly what to click or type so you can finish even if GitHub is brand new to you.
 
-1. **Fork the repository.**
-   - Once officers share the organization repository link, open it in your browser.
-   - Click the **Fork** button in the upper-right corner and accept the defaults. You now have your own copy of the project on GitHub.
-2. **Open GitHub Desktop and sign in.**
-   - If you are not already signed in, go to **File → Options → Accounts** (Windows) or **GitHub Desktop → Preferences → Accounts** (macOS) and sign in with your GitHub account.
-   - Choose **File → Clone Repository**, switch to the **GitHub.com** tab, and select the fork you just created. This downloads the files to your computer.
-3. **Create a branch for your work.**
-   - In GitHub Desktop click the branch dropdown (usually labeled "Current Branch") and choose **New Branch...**.
-   - Name the branch `add-your-name` and click **Create Branch**.
-4. **Add your student file.**
-   - In the file explorer on your computer open the project folder GitHub Desktop created.
-   - Copy `data/students/example.json` and rename the copy to `data/students/first-last.json`.
-     - Use your first and last name, all lowercase, and use dashes instead of spaces (for example, `alex-smith.json`).
-   - Open the new file in your text editor and change the values for `name`, `major`, and `grad_year`.
-5. **Save and check your changes.**
-   - Save the file in your editor.
-   - Return to GitHub Desktop; you will see the file listed under **Changes**.
-6. **Commit (save) your edits.**
-   - In GitHub Desktop, write a short summary such as `Add Alex Smith JSON entry`.
-   - Click **Commit to add-your-name**.
+1. **Fork the project on GitHub.**
+   - Open the repository link shared by the officers.
+   - Click the **Fork** button in the top-right corner and accept the defaults. GitHub creates a safe copy in your account.
+2. **Clone your fork with GitHub Desktop.**
+   - Launch GitHub Desktop. Sign in if prompted (Windows: `File > Options > Accounts`, macOS: `GitHub Desktop > Preferences > Accounts`).
+   - Choose **File > Clone Repository**, switch to the **GitHub.com** tab, select your fork, pick a folder on your computer, and click **Clone** to download the files.
+3. **Create your working branch.**
+   - In GitHub Desktop open the **Current Branch** menu.
+   - Select **New Branch...**, name it `add-your-name`, and click **Create Branch**. This branch is your personal work area.
+4. **Make your student JSON file.**
+   - Open the project folder on your computer and go to `data/students/`.
+   - Copy `example.json` and rename the copy to `first-last.json`. Use lowercase letters and dashes (for example, `alex-smith.json`). A school-appropriate pseudonym is fine if you prefer anonymity.
+   - Open the new file in a plain-text editor and update the `name`, `major`, and `grad_year` values to match what you want displayed.
+   - Set `link_url` to a site you are comfortable sharing (GitHub, LinkedIn, personal page, etc.). If you do not want to share a link, leave it blank or remove the line.
+   - Optional photo: add an image to the `assets/` folder and set the `photo` field to that filename (for example, `alex-smith.jpg`). Use a unique name ending with `.gif`, `.png`, `.jpg`, or `.jpeg`. Leaving the value `default.gif` tells the site to pick a random club image from `assets/defaults/` for you.
+   - If you added a custom photo, make sure the image file is inside the project so it can be uploaded with your JSON file.
+5. **Save and confirm the change.**
+   - Save the JSON file in your editor.
+   - Switch back to GitHub Desktop and make sure the file appears under **Changes**. That confirms Git noticed your edit.
+6. **Commit (save a snapshot).**
+   - In GitHub Desktop type a short summary such as `Add Alex Smith roster entry`.
+   - Click **Commit to add-your-name** to store the snapshot on your computer.
 7. **Push your branch to GitHub.**
-   - Click the **Publish branch** button (or **Push origin** if the branch already exists online). This uploads your branch to your fork on GitHub.
+   - Click **Publish branch** (or **Push origin** if you have already published). Your branch now lives on GitHub.
 8. **Open a pull request.**
-   - GitHub Desktop will show a button labeled **Create Pull Request**. Click it to open the pull request form in your web browser.
-   - The form is mostly filled out for you. Confirm the base repository is the organization repo the officers shared and the base branch is `main`.
-   - Write a short description (for example, "Add Alex Smith to the roster") and submit the pull request.
-9. **Wait for review.**
-   - An officer will review and merge your pull request. If changes are requested, follow their instructions and update your branch.
-10. **See your name on the live site.**
-    - After the officers run the manifest update (explained below) and the site rebuilds, refresh the live page to see your entry.
-    - The repository stays public only during the workshop window; the officers may set it to private again once everyone is finished.
+   - GitHub Desktop shows a **Create Pull Request** button. Click it to open the pull request form in your browser.
+   - Confirm the base repository is the IEEE TXST project and the base branch is `main`. Add a short description (for example, `Add Alex Smith to roster`) and submit the pull request.
+9. **Watch for reviewer feedback.**
+   - Officers review your pull request. If they ask for changes, edit the same JSON file, save, commit, and push again; the pull request updates automatically.
+10. **See your entry on the live site.**
+    - After your pull request is merged and the roster manifest is refreshed, GitHub Pages rebuilds the site. Give it a few minutes, reload the roster, and celebrate seeing your entry.
+    - During the workshop the repository stays public so everyone can learn together; it may be set to private afterward.
 
 ---
 
@@ -103,11 +117,14 @@ Follow the steps in order. GitHub Desktop makes them point-and-click.
 - Add exactly **one** JSON file in `data/students/` per pull request.
 - Keep filenames lowercase with dashes instead of spaces (example: `first-last.json`).
 - Do **not** change `index.html` or anything in the `js/` folder.
+- Profile photos are optional. If you add one, place the image in `assets/`, give it a unique filename, and only use `.gif`, `.png`, `.jpg`, or `.jpeg`. You may leave the `photo` field set to `default.gif` to have the site randomly choose one of the club-provided images in `assets/defaults/`.
+- Prefer a real name, but if you want to stay anonymous you can use an appropriate pseudonym; just complete the steps so you still learn the Git basics.
 - Do **not** include personal secrets such as passwords, phone numbers, or private emails.
 
 ---
 
-## 6. Organizer workflow
+<details>
+<summary><strong>6. Organizer workflow (officers only)</strong></summary>
 
 These steps are for IEEE TXST officers who manage the roster.
 
@@ -128,6 +145,8 @@ The script scans every JSON file in `data/students/` (except `index.json`), sort
 3. Commit the regenerated `data/students/index.json` with a message like `Update student manifest`.
 4. Push to the `main` branch so GitHub Pages rebuilds with the new entries.
 5. When the workshop window closes, you can make the organization repository private again if desired.
+
+</details>
 
 ---
 

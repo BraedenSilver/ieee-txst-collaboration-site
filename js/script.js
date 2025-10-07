@@ -15,23 +15,78 @@ async function fetchJson(url) {
   return response.json();
 }
 
-function normalizeRepoUrl(repo) {
-  const trimmedRepo = repo.trim();
-  if (!trimmedRepo) {
+function normalizeLinkUrl(linkUrl) {
+  const trimmedLink = linkUrl.trim();
+  if (!trimmedLink) {
     return '';
   }
 
-  return /^https?:\/\//i.test(trimmedRepo)
-    ? trimmedRepo
-    : `https://${trimmedRepo}`;
+  return /^https?:\/\//i.test(trimmedLink)
+    ? trimmedLink
+    : `https://${trimmedLink}`;
+}
+
+const SUPPORTED_PHOTO_EXTENSIONS = ['.gif', '.png', '.jpg', '.jpeg'];
+const DEFAULT_PHOTO_CHOICES = [
+  'defaults/bill.gif',
+  'defaults/gum.png',
+  'defaults/john.jpg',
+  'defaults/soy.png'
+];
+
+function pickRandomDefaultPhoto() {
+  if (!DEFAULT_PHOTO_CHOICES.length) {
+    return 'defaults/bill.gif';
+  }
+
+  const index = Math.floor(Math.random() * DEFAULT_PHOTO_CHOICES.length);
+  return DEFAULT_PHOTO_CHOICES[index];
+}
+
+function isSupportedPhotoFilename(photo) {
+  if (typeof photo !== 'string') {
+    return false;
+  }
+
+  const trimmed = photo.trim();
+  if (!trimmed) {
+    return false;
+  }
+
+  if (/[\\/]/.test(trimmed)) {
+    return false;
+  }
+
+  if (!/^[A-Za-z0-9._-]+$/.test(trimmed)) {
+    return false;
+  }
+
+  const lower = trimmed.toLowerCase();
+  return SUPPORTED_PHOTO_EXTENSIONS.some((ext) => lower.endsWith(ext));
+}
+
+function resolvePhotoFilename(photo) {
+  if (!isSupportedPhotoFilename(photo)) {
+    return pickRandomDefaultPhoto();
+  }
+
+  const trimmed = photo.trim();
+  if (trimmed.toLowerCase() === 'default.gif') {
+    return pickRandomDefaultPhoto();
+  }
+
+  return trimmed;
 }
 
 function isValidStudent(entry) {
   if (!entry || typeof entry !== 'object') return false;
-  const { name, major, grad_year: gradYear, repo } = entry;
-  const hasValidRepo =
-    repo === undefined ||
-    (typeof repo === 'string' && repo.trim().length > 0);
+  const { name, major, grad_year: gradYear, link_url: linkUrl, photo } = entry;
+  const hasValidLink =
+    linkUrl === undefined ||
+    typeof linkUrl === 'string';
+  const hasValidPhoto =
+    photo === undefined ||
+    isSupportedPhotoFilename(photo);
 
   return (
     typeof name === 'string' &&
@@ -40,7 +95,8 @@ function isValidStudent(entry) {
     major.trim().length > 0 &&
     (typeof gradYear === 'number' || typeof gradYear === 'string') &&
     `${gradYear}`.trim().length > 0 &&
-    hasValidRepo
+    hasValidLink &&
+    hasValidPhoto
   );
 }
 
@@ -54,31 +110,67 @@ function renderRoster(entries) {
     return;
   }
 
-  entries.forEach(({ name, major, grad_year: gradYear, repo }) => {
+  entries.forEach(({ name, major, grad_year: gradYear, link_url: linkUrl, photo }) => {
     const item = document.createElement('li');
     item.className = 'roster-entry';
+
+    const photoWrapper = document.createElement('div');
+    photoWrapper.className = 'roster-photo-wrapper';
+
+    const photoFilename = resolvePhotoFilename(photo);
+    const photoImage = document.createElement('img');
+    photoImage.className = 'roster-photo';
+    photoImage.src = `assets/${photoFilename}`;
+    photoImage.alt = `${name}'s profile photo`;
+
+    const trimmedLink = typeof linkUrl === 'string' ? linkUrl.trim() : '';
+    const normalizedLink = trimmedLink ? normalizeLinkUrl(trimmedLink) : '';
+
+    if (normalizedLink) {
+      const photoLink = document.createElement('a');
+      photoLink.href = normalizedLink;
+      photoLink.target = '_blank';
+      photoLink.rel = 'noopener noreferrer';
+      photoLink.appendChild(photoImage);
+      photoWrapper.appendChild(photoLink);
+    } else {
+      photoWrapper.appendChild(photoImage);
+    }
+
+    const content = document.createElement('div');
+    content.className = 'roster-content';
 
     const nameStrong = document.createElement('strong');
     nameStrong.textContent = name;
 
+    const meta = document.createElement('div');
+    meta.className = 'roster-meta';
+
     const details = document.createElement('span');
-    details.textContent = ` — ${major} — Class of ${gradYear}`;
+    details.className = 'roster-details';
+    details.textContent = ` - ${major} - Class of ${gradYear}`;
 
-    item.appendChild(nameStrong);
-    item.appendChild(details);
+    meta.appendChild(details);
 
-    if (typeof repo === 'string' && repo.trim().length > 0) {
-      const repoLink = document.createElement('a');
-      const repoText = repo.trim();
-      repoLink.href = normalizeRepoUrl(repoText);
-      repoLink.textContent = repoText;
-      repoLink.target = '_blank';
-      repoLink.rel = 'noopener noreferrer';
+    if (normalizedLink) {
+      const separator = document.createTextNode(' - ');
+      meta.appendChild(separator);
 
-      const separator = document.createTextNode(' — ');
-      item.appendChild(separator);
-      item.appendChild(repoLink);
+      const linkAnchor = document.createElement('a');
+      linkAnchor.className = 'roster-link';
+      linkAnchor.href = normalizedLink;
+      linkAnchor.textContent = trimmedLink;
+      linkAnchor.target = '_blank';
+      linkAnchor.rel = 'noopener noreferrer';
+
+      meta.appendChild(linkAnchor);
     }
+
+    content.appendChild(nameStrong);
+    content.appendChild(meta);
+
+    item.appendChild(photoWrapper);
+    item.appendChild(content);
 
     rosterElement.appendChild(item);
   });
