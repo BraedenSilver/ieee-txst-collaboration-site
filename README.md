@@ -1,7 +1,5 @@
 # IEEE TXST Computer Society — Collaborative Roster
 
-This repository powers the live roster that showcases everyone who participates in the IEEE TXST Computer Society collaborative workshop. Each student adds their own information by creating a small JSON file (a plain-text file that follows a simple structure). Once the file is approved, the live site updates to include the new entry. The exercise also gives you hands-on practice with Git version control, showing how teams coordinate changes without overwriting each other’s work.
-
 The README below explains everything in plain language, so even if you have never used GitHub before you can still follow along.
 
 ---
