@@ -69,6 +69,10 @@
       }
 
       .roster-entry {
+        margin: 0;
+      }
+
+      .roster-card {
         background: var(--accent-bg);
         border-left: 4px solid var(--gold);
         padding: 1.15rem 1.25rem;
@@ -79,6 +83,23 @@
         grid-template-columns: 72px 1fr;
         gap: 1rem;
         align-items: center;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .roster-card--link {
+        cursor: pointer;
+      }
+
+      .roster-card--link:hover,
+      .roster-card--link:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px rgba(80, 18, 20, 0.14);
+      }
+
+      .roster-card--link:focus-visible {
+        outline: 3px solid rgba(207, 161, 90, 0.65);
+        outline-offset: 3px;
       }
 
       .roster-photo-wrapper {
@@ -88,12 +109,6 @@
         overflow: hidden;
         box-shadow: 0 2px 6px rgba(80, 18, 20, 0.18);
         background: #ffffff;
-      }
-
-      .roster-photo-wrapper a {
-        display: inline-block;
-        width: 100%;
-        height: 100%;
       }
 
       .roster-photo {
@@ -117,22 +132,15 @@
       .roster-link {
         color: var(--maroon);
         font-weight: 500;
-        text-decoration: none;
       }
 
-      .roster-link:hover,
-      .roster-link:focus-visible {
+      .roster-card--link:hover .roster-link,
+      .roster-card--link:focus-visible .roster-link {
         text-decoration: underline;
       }
 
-      .roster-entry strong {
+      .roster-card strong {
         color: var(--maroon);
-      }
-
-      .roster-entry:hover,
-      .roster-entry:focus-within {
-        transform: translateY(-2px);
-        box-shadow: 0 12px 24px rgba(80, 18, 20, 0.14);
       }
 
       .powered-by {

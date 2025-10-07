@@ -114,6 +114,21 @@ function renderRoster(entries) {
     const item = document.createElement('li');
     item.className = 'roster-entry';
 
+    const trimmedLink = typeof linkUrl === 'string' ? linkUrl.trim() : '';
+    const normalizedLink = trimmedLink ? normalizeLinkUrl(trimmedLink) : '';
+
+    const card = normalizedLink
+      ? document.createElement('a')
+      : document.createElement('div');
+    card.className = 'roster-card';
+
+    if (normalizedLink) {
+      card.href = normalizedLink;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.classList.add('roster-card--link');
+    }
+
     const photoWrapper = document.createElement('div');
     photoWrapper.className = 'roster-photo-wrapper';
 
@@ -123,19 +138,7 @@ function renderRoster(entries) {
     photoImage.src = `assets/${photoFilename}`;
     photoImage.alt = `${name}'s profile photo`;
 
-    const trimmedLink = typeof linkUrl === 'string' ? linkUrl.trim() : '';
-    const normalizedLink = trimmedLink ? normalizeLinkUrl(trimmedLink) : '';
-
-    if (normalizedLink) {
-      const photoLink = document.createElement('a');
-      photoLink.href = normalizedLink;
-      photoLink.target = '_blank';
-      photoLink.rel = 'noopener noreferrer';
-      photoLink.appendChild(photoImage);
-      photoWrapper.appendChild(photoLink);
-    } else {
-      photoWrapper.appendChild(photoImage);
-    }
+    photoWrapper.appendChild(photoImage);
 
     const content = document.createElement('div');
     content.className = 'roster-content';
@@ -156,21 +159,20 @@ function renderRoster(entries) {
       const separator = document.createTextNode(' - ');
       meta.appendChild(separator);
 
-      const linkAnchor = document.createElement('a');
-      linkAnchor.className = 'roster-link';
-      linkAnchor.href = normalizedLink;
-      linkAnchor.textContent = trimmedLink;
-      linkAnchor.target = '_blank';
-      linkAnchor.rel = 'noopener noreferrer';
+      const linkText = document.createElement('span');
+      linkText.className = 'roster-link';
+      linkText.textContent = trimmedLink;
 
-      meta.appendChild(linkAnchor);
+      meta.appendChild(linkText);
     }
 
     content.appendChild(nameStrong);
     content.appendChild(meta);
 
-    item.appendChild(photoWrapper);
-    item.appendChild(content);
+    card.appendChild(photoWrapper);
+    card.appendChild(content);
+
+    item.appendChild(card);
 
     rosterElement.appendChild(item);
   });
