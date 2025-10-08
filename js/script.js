@@ -28,10 +28,14 @@ function normalizeLinkUrl(linkUrl) {
 
 const SUPPORTED_PHOTO_EXTENSIONS = ['.gif', '.png', '.jpg', '.jpeg'];
 const DEFAULT_PHOTO_CHOICES = [
-  'defaults/bill.gif',
-  'defaults/gum.png',
-  'defaults/john.jpg',
-  'defaults/soy.png'
+  'defaults/bobcat1.jpg',
+  'defaults/bobcat2.jpg',
+  'defaults/bobcat3.jpg',
+  'defaults/bobcat4.jpg',
+  'defaults/bobcat5.jpg',
+  'defaults/bobcat6.jpg',
+  'defaults/bobcat7.jpg',
+  'defaults/bobcat8.jpg',
 ];
 
 function pickRandomDefaultPhoto() {
