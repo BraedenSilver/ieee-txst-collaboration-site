@@ -10,6 +10,9 @@ const DEFAULT_PHOTO_CHOICES = [
   'defaults/bobcat6.jpg',
   'defaults/bobcat7.jpg',
   'defaults/bobcat8.jpg',
+  'defaults/bobcat9.png',
+  'defaults/bobcat10.png',
+  'defaults/bobcat11.jpg',
 ];
 
 function pickRandomDefaultPhoto() {
