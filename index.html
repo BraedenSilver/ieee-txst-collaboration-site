@@ -11,6 +11,11 @@
         --background: #ffffff;
         --text-color: #1f1f1f;
         --accent-bg: #f8f3ea;
+        --color-orbby-skin: #ffd9a0;
+        --color-orbby-border: rgba(80, 18, 20, 0.65);
+        --color-orbby-sclera: #ffffff;
+        --color-orbby-pupil: #1f1f1f;
+        --color-shadow: rgba(80, 18, 20, 0.18);
       }
 
       body {
@@ -169,6 +174,8 @@
         padding: 2rem 1.5rem 2.5rem;
         margin-top: 8rem;
         text-align: center;
+        position: relative;
+        overflow: hidden;
       }
 
       .powered-by p {
@@ -197,6 +204,104 @@
         color: #ffffff;
         border-color: transparent;
         background: var(--maroon);
+      }
+
+      .orbby-peek {
+        --orbby-body: var(--color-orbby-skin);
+        --orbby-border: var(--color-orbby-border);
+        --orbby-shadow: var(--color-shadow);
+
+        position: absolute;
+        bottom: -30px;
+        width: 160px;
+        height: 120px;
+        overflow: visible;
+        pointer-events: none;
+      }
+
+      .orbby-peek--left {
+        left: 10px;
+      }
+
+      .orbby-peek--right {
+        right: 10px;
+      }
+
+      .orbby-peek--gold {
+        --orbby-body: var(--gold);
+        --orbby-border: #8b5e1d;
+        --orbby-shadow: rgba(139, 94, 29, 0.28);
+      }
+
+      .orbby-peek .head {
+        position: absolute;
+        top: 0;
+        width: 120px;
+        height: 120px;
+        border: 2px solid var(--orbby-border);
+        border-radius: 50%;
+        background: var(--orbby-body);
+      }
+
+      .orbby-peek--left .head {
+        left: 0;
+        box-shadow: -4px 4px 0 var(--orbby-shadow);
+      }
+
+      .orbby-peek--right .head {
+        right: 0;
+        box-shadow: 4px 4px 0 var(--orbby-shadow);
+      }
+
+      .footer-eyes .eye {
+        --eye-size: 28px;
+        --eye-border: 2px;
+        width: var(--eye-size);
+        height: var(--eye-size);
+        border-radius: 50%;
+        background: var(--color-orbby-sclera);
+        border: var(--eye-border) solid var(--orbby-border);
+        position: absolute;
+        overflow: hidden;
+        transition: transform 150ms ease;
+      }
+
+      .footer-eyes .eye.left {
+        left: 24px;
+        --eye-top: 38px;
+        top: var(--eye-top);
+      }
+
+      .footer-eyes .eye.right {
+        right: 24px;
+        --eye-top: 38px;
+        top: var(--eye-top);
+      }
+
+      .footer-eyes .pupil {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: var(--color-orbby-pupil);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%) translate3d(0, 0, 0);
+        transition: transform var(--pupil-transition-duration, 80ms) ease;
+        will-change: transform;
+      }
+
+      .footer-eyes .eye.wink {
+        height: 0;
+        top: calc(var(--eye-top) + var(--eye-size) / 2 - var(--eye-border) / 2);
+        border: none;
+        border-top: var(--eye-border) solid var(--orbby-border);
+        border-radius: 0;
+        transform: none;
+      }
+
+      .footer-eyes .eye.wink .pupil {
+        display: none;
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -247,6 +352,18 @@
       <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer"
         >Learn more about GitHub Pages</a
       >
+      <div class="orbby-peek orbby-peek--left orbby-peek--gold footer-eyes" aria-hidden="true">
+        <div class="head">
+          <div class="eye left"><div class="pupil"></div></div>
+          <div class="eye right"><div class="pupil"></div></div>
+        </div>
+      </div>
+      <div class="orbby-peek orbby-peek--right orbby-peek--gold footer-eyes" aria-hidden="true">
+        <div class="head">
+          <div class="eye left"><div class="pupil"></div></div>
+          <div class="eye right"><div class="pupil"></div></div>
+        </div>
+      </div>
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>
