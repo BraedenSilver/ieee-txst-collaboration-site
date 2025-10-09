@@ -26,6 +26,10 @@
         line-height: 1.6;
       }
 
+      body.konami-overlay-open {
+        overflow: hidden;
+      }
+
       header {
         background: linear-gradient(135deg, #2f0a0c, var(--maroon));
         color: #ffffff;
@@ -206,6 +210,90 @@
         background: var(--maroon);
       }
 
+      .konami-overlay {
+        position: fixed;
+        inset: 0;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        background: rgba(47, 10, 12, 0.92);
+        color: #ffffff;
+        text-align: center;
+        z-index: 1000;
+      }
+
+      .konami-overlay.is-visible {
+        display: flex;
+      }
+
+      .konami-overlay__content {
+        max-width: 720px;
+        width: min(720px, 100%);
+        background: rgba(80, 18, 20, 0.35);
+        border: 2px solid var(--gold);
+        border-radius: 16px;
+        padding: 2.5rem 2rem 2.25rem;
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.45);
+      }
+
+      .konami-overlay__title {
+        font-size: clamp(1.6rem, 3vw, 2.4rem);
+        margin: 0 0 1.15rem;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .konami-overlay__text {
+        margin: 0 auto 1.5rem;
+        max-width: 38ch;
+        font-size: 1.1rem;
+      }
+
+      .konami-overlay__video {
+        position: relative;
+        width: min(640px, 100%);
+        margin: 0 auto;
+        padding-top: 56.25%;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+      }
+
+      .konami-overlay__video iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+
+      .konami-overlay__close {
+        margin-top: 1.75rem;
+        padding: 0.6rem 1.5rem;
+        background: #ffffff;
+        color: var(--maroon);
+        border: none;
+        border-radius: 999px;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+        transition: transform 150ms ease, box-shadow 150ms ease;
+      }
+
+      .konami-overlay__close:hover,
+      .konami-overlay__close:focus-visible {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+      }
+
+      .konami-overlay__close:focus-visible {
+        outline: 3px solid rgba(207, 161, 90, 0.65);
+        outline-offset: 4px;
+      }
+
       .orbby-peek {
         --orbby-body: var(--color-orbby-skin);
         --orbby-border: var(--color-orbby-border);
@@ -365,6 +453,30 @@
         </div>
       </div>
     </footer>
+    <div
+      id="konami-overlay"
+      class="konami-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+    >
+      <div class="konami-overlay__content">
+        <h2 class="konami-overlay__title">You've Been Rickrolled!</h2>
+        <div class="konami-overlay__video">
+          <iframe
+            id="konami-overlay-video"
+            title="Never Gonna Give You Up video"
+            width="560"
+            height="315"
+            src=""
+            data-video-src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&rel=0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <button type="button" class="konami-overlay__close">Close</button>
+      </div>
+    </div>
     <script type="module" src="./js/main.js"></script>
   </body>
 </html>
