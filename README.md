@@ -1,3 +1,5 @@
+![Scan to view the roster](qr-code.png)
+
 # IEEE TXST Computer Society — Collaborative Roster
 
 The README below explains everything in plain language, so even if you have never used GitHub before you can still follow along.
@@ -161,3 +163,4 @@ The roster is hosted through GitHub Pages, so every accepted pull request automa
 If you get stuck at any point, reach out to an IEEE TXST Computer Society officer. They can walk you through the steps live or share screenshots of what to click.
 
 Happy collaborating!
+
