@@ -1,16 +1,18 @@
 ## Summary
 
-- Add your JSON file to the roster.
+- Add your student JSON file to the roster (and optionally a photo in `assets/`).
 
 ## Checklist
 
 > Replace the ❌ with ✅ as you complete each step. Copy/paste helpers: ✅ ❌
 
 - [ ]  Added one **new** file under `data/students/` named `first-last.json`
+- [ ]  New student file uses the `.json` extension and lowercase-dash filename format
 - [ ]  JSON includes `name`, `major`, and `grad_year`
 - [ ]  Confirmed no secrets, API keys, or personal contact info
 - [ ]  Did **not** edit `index.html`
-- [ ]  Did **not** modify files outside `data/students/` (other than this template)
+- [ ]  If a custom photo was added, it lives in `assets/`
+- [ ]  Did **not** modify files outside `data/students/` or `assets/` (other than this template)
 - [ ]  Did **not** change `data/students/index.json`
 
 ## Additional notes
