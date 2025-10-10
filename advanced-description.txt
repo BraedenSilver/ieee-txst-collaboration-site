@@ -3,7 +3,7 @@ Advanced Technical Description of ieee-txst-collaboration-site Repository
 
 Overview
 --------
-This repository hosts a static, client-rendered roster web application for the IEEE TXST Computer Society. The application is delivered as a simple GitHub Pages-compatible site without build tooling. It relies on declarative HTML, embedded CSS, vanilla JavaScript, and JSON data. An auxiliary Python script allows organizers to regenerate the JSON manifest that enumerates student data files.
+This repository hosts a static, client-rendered roster web application for the TXST IEEE Computer Society GitHub Workshop. The application is delivered as a simple GitHub Pages-compatible site without build tooling. It relies on declarative HTML, embedded CSS, vanilla JavaScript, and JSON data. An auxiliary Python script allows organizers to regenerate the JSON manifest that enumerates student data files.
 
 Directory Topology
 ------------------
@@ -21,7 +21,7 @@ index.html
 - Declares the document language as English and sets responsive viewport metadata.
 - Applies inline CSS to avoid external stylesheet dependencies, defining TXST-aligned color variables (`--maroon`, `--gold`, etc.) and typography rules.
 - Structure:
-  - `<header>` with the primary title “IEEE TXST Computer Society — Collaborative Roster” and a call-to-action paragraph.
+  - `<header>` with the primary title “TXST IEEE Computer Society GitHub Workshop” and a call-to-action paragraph.
   - `<main>` containing a secondary heading, explanatory paragraph, roster container `<ul id="roster">`, and a `<noscript>` fallback message.
 - Defers loading of `/js/script.js` to maintain HTML parsing performance.
 - Accessibility considerations include `aria-live="polite"` on the roster `<ul>` so assistive technologies announce dynamic updates.
