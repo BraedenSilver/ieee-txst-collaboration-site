@@ -42,6 +42,10 @@
         padding: 2.5rem 1.5rem 2rem;
         text-align: center;
         box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
       }
 
       header h1 {
@@ -74,6 +78,37 @@
         margin: 0 auto;
         font-size: 1.05rem;
         max-width: 42rem;
+      }
+
+      .source-code-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        margin: 1.5rem 0 1rem;
+        padding: 0.75rem 1.8rem;
+        border-radius: 999px;
+        border: 2px solid var(--gold);
+        background: var(--gold);
+        color: #1f1f1f;
+        font-weight: 600;
+        letter-spacing: 0.03em;
+        text-decoration: none;
+        transition: transform 150ms ease, box-shadow 150ms ease,
+          background-color 150ms ease, color 150ms ease, border-color 150ms ease;
+      }
+
+      .source-code-button:hover,
+      .source-code-button:focus-visible {
+        background: transparent;
+        color: var(--gold);
+        border-color: var(--gold);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .source-code-button:focus-visible {
+        outline: 3px solid rgba(207, 161, 90, 0.65);
+        outline-offset: 4px;
       }
 
       main {
@@ -196,7 +231,7 @@
         text-transform: uppercase;
       }
 
-      .powered-by a {
+      .powered-by a:not(.source-code-button) {
         display: inline-block;
         margin-top: 0.65rem;
         font-weight: 500;
@@ -209,8 +244,8 @@
         transition: color 160ms ease, border-color 160ms ease, background 160ms ease;
       }
 
-      .powered-by a:hover,
-      .powered-by a:focus-visible {
+      .powered-by a:not(.source-code-button):hover,
+      .powered-by a:not(.source-code-button):focus-visible {
         color: #ffffff;
         border-color: transparent;
         background: var(--maroon);
@@ -416,7 +451,6 @@
       <p class="logo" aria-hidden="true">
         TXST IEEE Computer Society GitHub Workshop
       </p>
-      <p>Collaborate. Commit. Create.</p>
     </header>
     <main>
       <h2>Current Contributors</h2>
@@ -434,6 +468,13 @@
     </main>
     <footer class="powered-by" aria-label="Powered by GitHub Pages">
       <p>Powered by GitHub Pages</p>
+      <a
+        class="source-code-button"
+        href="https://github.com/TXST-Computer-Society-Workshop-Projects/TXST-Computer-Society-Workshop-Projects.github.io"
+        target="_blank"
+        rel="noopener noreferrer"
+        >Source Code Link</a
+      >
       <a href="https://pages.github.com/" target="_blank" rel="noopener noreferrer"
         >Learn more about GitHub Pages</a
       >
