@@ -1,6 +1,6 @@
 ![Scan to view the roster](qr-code.png)
 
-# IEEE TXST Computer Society — Collaborative Roster
+# TXST IEEE Computer Society GitHub Workshop
 
 The README below explains everything in plain language, so even if you have never used GitHub before you can still follow along.
 
@@ -103,7 +103,7 @@ Follow these instructions one at a time. Every bullet tells you exactly what to 
    - Click **Publish branch** (or **Push origin** if you have already published). Your branch now lives on GitHub.
 8. **Open a pull request.**
    - GitHub Desktop shows a **Create Pull Request** button. Click it to open the pull request form in your browser.
-   - Confirm the base repository is the IEEE TXST project and the base branch is `main`. Add a short description (for example, `Add Alex Smith to roster`) and submit the pull request.
+   - Confirm the base repository is the TXST IEEE Computer Society GitHub Workshop project and the base branch is `main`. Add a short description (for example, `Add Alex Smith to roster`) and submit the pull request.
 9. **Watch for reviewer feedback.**
    - Officers review your pull request. If they ask for changes, edit the same JSON file, save, commit, and push again; the pull request updates automatically.
 10. **See your entry on the live site.**
@@ -126,7 +126,7 @@ Follow these instructions one at a time. Every bullet tells you exactly what to 
 <details>
 <summary><strong>6. Organizer workflow (officers only)</strong></summary>
 
-These steps are for IEEE TXST officers who manage the roster.
+These steps are for TXST IEEE Computer Society officers who manage the roster.
 
 ### 6.1 Update the student manifest
 
@@ -160,7 +160,7 @@ The roster is hosted through GitHub Pages, so every accepted pull request automa
 
 ## 8. Need help?
 
-If you get stuck at any point, reach out to an IEEE TXST Computer Society officer. They can walk you through the steps live or share screenshots of what to click.
+If you get stuck at any point, reach out to a TXST IEEE Computer Society officer. They can walk you through the steps live or share screenshots of what to click.
 
 Happy collaborating!
 
